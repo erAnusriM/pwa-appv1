@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 interface NavbarLinkProps {
   //   modal: Modal;
@@ -15,7 +15,7 @@ interface NavbarLinkProps {
 
 function NavbarLink(props: NavbarLinkProps) {
   return (
-    <div className="ml-4 flex items-center">
+    <div className="flex items-center ml-4">
       <Link to={`/${props.url}`}>
         <div
           className="font-sans text-xs md:text-md lg:text-lg"

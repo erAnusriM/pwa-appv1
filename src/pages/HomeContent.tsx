@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { ScrollToPlugin, Elastic, TweenLite, Linear, SlowMo } from "gsap/all";
+import { ScrollToPlugin } from "gsap/all";
 import "./HomeContent.css";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
@@ -169,6 +169,7 @@ function HomeContent(props: HomeContentProps) {
                   GSAP is used on over 8,500,000 sites and over 1,000 sites
                   featured on{" "}
                   <a
+                    rel="noreferrer"
                     href="https://www.awwwards.com/websites/gsap-animation/"
                     target="_blank"
                   >
