@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import NavbarLink from "../Components/NavbarLink";
-import { TextField, Button, Grid, Slide, Paper } from "@material-ui/core";
+import { Slide } from "@material-ui/core";
 import HomeContent from "./HomeContent";
 
 interface NavbarProps {

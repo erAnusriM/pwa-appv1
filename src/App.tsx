@@ -1,9 +1,9 @@
 import React from "react";
-import logo from "./logo.svg";
+// import logo from "./logo.svg";
 import "./App.css";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import styles from "./App.module.css";
-import Navbar from "./Components/Navbar";
+// import styles from "./App.module.css";
+// import Navbar from "./Components/Navbar";
 import Home from "./pages/Home";
 
 function App() {
