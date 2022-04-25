@@ -116,12 +116,20 @@
 
 import * as React from "react";
 import Popover from "@material-ui/core/Popover";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import BurgerIcon from "./../BurgerIcon/BurgerIcon";
+// import Typography from "@material-ui/core/Typography";
+// import Button from "@material-ui/core/Button";
+// import BurgerIcon from "./../BurgerIcon/BurgerIcon";
 import "./../BurgerIcon/BurgerIcon.css";
-import { makeStyles, ThemeProvider } from "@material-ui/core/styles";
+import { /* makeStyles, */ ThemeProvider } from "@material-ui/core/styles";
 import { createTheme as createMuiTheme } from "@material-ui/core";
+import NavbarLink from "Components/NavbarLink";
+import { useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/all";
+import { TweenLite, TimelineMax, Linear, Back, Sine } from "gsap";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const theme = (createMuiTheme as any)({
   overrides: {
@@ -153,39 +161,83 @@ export default function BasicPopover() {
     active: false,
     e: null,
   });
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | any>(null);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | any>({
+    anchor: null,
+    elem1: null,
+    elem2: null,
+    elem3: null,
+    elem4: null,
+  });
+  const navigate = useNavigate();
 
   // const [open, setOpen] = React.useState(false);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement> | any) => {
     // console.log("anchorEl seting", event?.currentTarget);
-    event && setAnchorEl(event?.target);
+    event && setAnchorEl({ ...anchorEl, anchor: event?.target });
+
     // setOpen(open);
   };
 
   const handleClose = () => {
-    setAnchorEl(null);
+    setAnchorEl({
+      anchor: null,
+      elem1: null,
+      elem2: null,
+      elem3: null,
+      elem4: null,
+    });
   };
 
   // console.log("anchorEl", anchorEl);
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const handleOnClickLink = (url: string) => {
+    handleClose();
+    navigate(url);
+  };
 
-  // React.useEffect(() => {
-  //   console.log("burgerIcon.active", burgerIcon.active);
-  //   // console.log(burgerIcon.active, burgerIcon.e);
-  //   if (burgerIcon.active) {
-  //     // burgerIcon.e?.target?.classList?.add("active");
-  //     handleClick(burgerIcon?.e);
-  //     // setOpen(true);
-  //   }
-  //   if (!burgerIcon.active) {
-  //     // burgerIcon.e?.target?.classList?.remove("active");
-  //     handleClick(burgerIcon?.e);
-  //     // setOpen(false);
-  //   }
-  // }, [burgerIcon.active, burgerIcon.e]);
+  const open = Boolean(anchorEl.anchor);
+  const id = open ? "simple-popover" : undefined;
+  // let element = document.getElementById("#one");
+
+  React.useEffect(() => {
+    if (anchorEl.anchor && anchorEl.elem1 === null) {
+      let elem1 = document.getElementById("one");
+      let elem2 = document.getElementById("two");
+      let elem3 = document.getElementById("three");
+      let elem4 = document.getElementById("four");
+
+      setAnchorEl({ ...anchorEl, elem1, elem2, elem3, elem4 });
+    }
+  }, [anchorEl]);
+
+  if (anchorEl.elem1) {
+    // gsap.fromTo(
+    //   [anchorEl.elem1, anchorEl.elem2, anchorEl.elem3, anchorEl.elem4],
+    //   { opacity: 0, y: 50, duration: 0.5 },
+    //   { opacity: 1, y: 0, duration: 0.5, delay: 0.5 }
+    // );
+    gsap.fromTo(
+      anchorEl.elem1,
+      { opacity: 0, x: -5, duration: 0.5 },
+      { opacity: 1, x: 10, duration: 0.5, delay: 0.5 }
+    );
+    gsap.fromTo(
+      anchorEl.elem2,
+      { opacity: 0, x: -5, duration: 0.5 },
+      { opacity: 1, x: 10, duration: 0.5, delay: 0.7 }
+    );
+    gsap.fromTo(
+      anchorEl.elem3,
+      { opacity: 0, x: -5, duration: 0.5 },
+      { opacity: 1, x: 10, duration: 0.5, delay: 0.9 }
+    );
+    gsap.fromTo(
+      anchorEl.elem4,
+      { opacity: 0, x: -5, duration: 0.5 },
+      { opacity: 1, x: 10, duration: 0.5, delay: 1.1 }
+    );
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -220,7 +272,7 @@ export default function BasicPopover() {
         <Popover
           id={id}
           open={open}
-          anchorEl={anchorEl}
+          anchorEl={anchorEl.anchor}
           onClose={handleClose}
           anchorOrigin={{
             vertical: "bottom",
@@ -228,7 +280,45 @@ export default function BasicPopover() {
           }}
         >
           <div className="w-screen h-screen overflow-y-hidden">
-            <Typography>The content of the Popover.</Typography>
+            {/* <Typography>The content of the Popover.</Typography> */}
+            <div className="absolute top-0 left-0 inline-block header_link_section">
+              <div id="one">
+                <NavbarLink
+                  name="Home"
+                  url=""
+                  style={{ marginTop: "16px", fontSize: "18px" }}
+                  className="pt-6 font-semibold tracking-widest text-gray-500 text-opacity-50 header_link"
+                  handleOnClickLink={(url) => handleOnClickLink(url)}
+                />
+              </div>
+              <div id="two">
+                <NavbarLink
+                  name="Feedback"
+                  url=""
+                  style={{ marginTop: "16px", fontSize: "18px" }}
+                  className="pt-4 font-semibold tracking-widest text-gray-500 text-opacity-50 header_link one"
+                  handleOnClickLink={(url) => handleOnClickLink(url)}
+                />
+              </div>
+              <div id="three">
+                <NavbarLink
+                  name="About Us"
+                  url=""
+                  style={{ marginTop: "16px", fontSize: "18px" }}
+                  className="pt-4 font-semibold tracking-widest text-gray-500 text-opacity-50 header_link two"
+                  handleOnClickLink={(url) => handleOnClickLink(url)}
+                />
+              </div>
+              <div id="four">
+                <NavbarLink
+                  name="Contact"
+                  url=""
+                  style={{ marginTop: "16px", fontSize: "18px" }}
+                  className="pt-4 font-semibold tracking-widest text-gray-500 text-opacity-50 header_link three"
+                  handleOnClickLink={(url) => handleOnClickLink(url)}
+                />
+              </div>
+            </div>
           </div>
         </Popover>
       </div>
