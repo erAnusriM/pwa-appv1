@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, useEffect } from "react";
-import Navbar from "../Components/Navbar";
+// import Navbar from "../Components/Navbar";
 import NavbarLink from "../Components/NavbarLink";
 import { Slide } from "@material-ui/core";
 import HomeContent from "./HomeContent";
+// import GridComponent from "../Components/GridComponent/GridComponent";
 
 interface NavbarProps {
   //   modal: Modal;
@@ -76,8 +77,10 @@ function Home(props: NavbarProps) {
 
   return (
     <>
-      <Navbar onClickMenuOpen={(showLinks) => onClickMenuOpen(showLinks)} />
+      {/* <GridComponent> */}
+      {/* <Navbar onClickMenuOpen={(showLinks) => onClickMenuOpen(showLinks)} /> */}
       <HomeContent showLinkSection={showLinkSection} />
+      {/* </GridComponent> */}
     </>
   );
 }
